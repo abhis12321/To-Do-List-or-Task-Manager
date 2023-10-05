@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
 import './App.css';
 import Task from './components/Task';
+import TaskForm from './components/TaskForm';
 
 const App = () => {
   const [card , setCard] = useState(null);
-  const [i , setId] = useState(4);
+  const [i , setId] = useState(0);
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Task 1', description: 'Description 1', status: 'todo' },
     { id: 2, title: 'Task 2', description: 'Description 2', status: 'doing' },
     { id: 3, title: 'Task 3', description: 'Description 3', status: 'done' },
   ]);
 
-  // 
+  // CREATE NEW TASKS
   const createTask = (event) => {
-    // let t = tasks;
-    tasks.push({id : i , title:document.getElementById('title').value , description : document.getElementById('desc').value, status:document.getElementById('status').value});
-    
-    setTasks(tasks);
+    setTasks([...tasks, 
+      {id : i , title:document.getElementById('title').value , description : document.getElementById('desc').value, status:document.getElementById('status').value}
+    ]);
     setId(i + 1);
 
   }
 
-  // 
+  // HANDLE TITLE OF A TASK
   const handleTitle = (id , title , desc) => {
     tasks[id-1].title = title;
     tasks[id-1].description = desc;
-    setTasks(tasks);
-    setId(i + 1);
-    setId(i - 1);
-
+    setTasks([...tasks])
   }
 
   // HANDLE STATE
   const handleState = (status)=> {
-    tasks[card-1].status = null;
-    tasks.push({id : i , title:tasks[card-1].title , description : tasks[card-1].description, status:status});
-    
-    setTasks(tasks);
-    setId(i + 1);
+    tasks[card-1].status = status;
+    setTasks([...tasks]);
   }
 
   //DRAGGING SECTION CODE
@@ -53,7 +47,7 @@ const App = () => {
   };
 
   const overD = (event) => {
-    event.target.style.border = "2px dotted green";
+    // event.target.style.border = "2px dotted green";
     // event.target.style.backgroundColor = "grey";
     event.preventDefault();
   };
@@ -75,38 +69,28 @@ const App = () => {
   return (
     <>
       <div className="App">
+
         <div className="column" onDrop={droP} onDragOver={overD}>
           <h1>To Do</h1>
           {tasks.map(task => task.status === 'todo' && <Task key={task.id} task={task} handleTitle = {handleTitle} startD = {startD} onD = {onD}/>)}
         </div>
+
+
         <div className="column" onDrop={droP} onDragOver={overD}>
           <h1>Doing</h1>
           {tasks.map(task => task.status === 'doing' && <Task key={task.id} task={task} handleTitle = {handleTitle} startD = {startD} onD = {onD}/>)}
         </div>
+
+
         <div className="column" onDrop={droP} onDragOver={overD}>
           <h1>Done</h1>
           {tasks.map(task => task.status === 'done' && <Task key={task.id} task={task} handleTitle = {handleTitle} startD = {startD} onD = {onD}/>)}
-        </div>        
+        </div>  
+              
       </div>
 
 
-      <div className="create" >
-        <h1>Add new Task</h1>
-        
-        <input type="text" placeholder='title'  className='inp' id = "title" required />
-        <textarea name="desc" cols="30" rows="10" placeholder='description' className='inp' id = "desc" required></textarea>
-        
-        <div className='status inp'  >
-          <label htmlFor="status">status</label>  
-          <select name="status" id="status" className='inp' >
-            <option value="todo" className='inp'>ToDo</option>  
-            <option value="doing" className='inp'>Doing</option>  
-            <option value="done" className='inp'>Done</option>  
-          </select> 
-        </div>
-        
-        <button className='inp' onClick={createTask}>create</button>
-      </div>
+      <TaskForm  createTask = {createTask}   />
     </>
   );
 };
