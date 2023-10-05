@@ -8,7 +8,7 @@ export default function Task(props) {
       let input = DIV.getElementsByTagName('input');
       let button = DIV.getElementsByTagName('button');
 
-      button[0].style.display = 'block';
+      button[0].style.display = 'inline';
 
       input[0].disabled = false;
       input[1].disabled = false;
@@ -48,6 +48,7 @@ export default function Task(props) {
       <div >
         <input value={props.task.title} className = "title1 gap" disabled="disabled" onChange={changeInfo}/>
         <input value={props.task.description} className = "desc1 gap" disabled="disabled" onChange={changeInfo}/>
+        
         <button className='saveEdit' onClick={saveEdit}>save</button>
       </div>
     </div>

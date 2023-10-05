@@ -5,18 +5,33 @@ import TaskForm from './components/TaskForm';
 
 const App = () => {
   const [card , setCard] = useState(null);
-  const [i , setId] = useState(0);
+  const [i , setId] = useState(4);
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Task 1', description: 'Description 1', status: 'todo' },
     { id: 2, title: 'Task 2', description: 'Description 2', status: 'doing' },
     { id: 3, title: 'Task 3', description: 'Description 3', status: 'done' },
   ]);
 
+  React.useEffect(() => {
+    const list = JSON.parse(localStorage.getItem('tasks'));
+    if(list != null) {
+      setTasks(list);
+      setId(list.length + 1);
+    }
+  } , []);
+
+  React.useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  } , [tasks]);
+
+
   // CREATE NEW TASKS
   const createTask = (event) => {
+    event.preventDefault();
     setTasks([...tasks, 
       {id : i , title:document.getElementById('title').value , description : document.getElementById('desc').value, status:document.getElementById('status').value}
     ]);
+    
     setId(i + 1);
 
   }
@@ -36,14 +51,14 @@ const App = () => {
 
   //DRAGGING SECTION CODE
   const startD = (event) => {
-    event.target.style.color = "red";
+    // event.target.style.color = "red";
     event.dataTransfer.setData("Text", event.target.id);
     setCard(event.target.id)
     // console.log(event.target, event.target.id);
   };
 
   const onD = (event) => {
-    event.target.style.backgroundColor = "yellow";
+    // event.target.style.backgroundColor = "yellow";
   };
 
   const overD = (event) => {
@@ -53,8 +68,8 @@ const App = () => {
   };
 
   const droP = (event) => {
-    event.target.style.color =  "white";
-    event.target.style.border = "2px solid black";
+    // event.target.style.color =  "white";
+    // event.target.style.border = "2px solid black";
     // event.target.style.background = "local";
     event.preventDefault();
     
@@ -63,27 +78,27 @@ const App = () => {
     let H1 = event.target.getElementsByTagName('h1');
     let status = H1[0].innerText === "To Do" ? 'todo' : (H1[0].innerText === "Doing" ? 'doing' : 'done');
     handleState(status);
-    console.log(H1[0].innerText);
+    // console.log(H1[0].innerText);
   };
 
   return (
-    <>
+    <div className='img'>
       <div className="App">
 
         <div className="column" onDrop={droP} onDragOver={overD}>
-          <h1>To Do</h1>
+          <h1 className='tag'>To Do</h1>
           {tasks.map(task => task.status === 'todo' && <Task key={task.id} task={task} handleTitle = {handleTitle} startD = {startD} onD = {onD}/>)}
         </div>
 
 
         <div className="column" onDrop={droP} onDragOver={overD}>
-          <h1>Doing</h1>
+          <h1 className='tag'>Doing</h1>
           {tasks.map(task => task.status === 'doing' && <Task key={task.id} task={task} handleTitle = {handleTitle} startD = {startD} onD = {onD}/>)}
         </div>
 
 
         <div className="column" onDrop={droP} onDragOver={overD}>
-          <h1>Done</h1>
+          <h1 className='tag'>Done</h1>
           {tasks.map(task => task.status === 'done' && <Task key={task.id} task={task} handleTitle = {handleTitle} startD = {startD} onD = {onD}/>)}
         </div>  
               
@@ -91,7 +106,7 @@ const App = () => {
 
 
       <TaskForm  createTask = {createTask}   />
-    </>
+    </div>
   );
 };
 
