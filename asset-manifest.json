@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/kanban_board/static/css/main.79f98983.css",
-    "main.js": "/kanban_board/static/js/main.0217e89a.js",
-    "static/js/787.0dc1bfd1.chunk.js": "/kanban_board/static/js/787.0dc1bfd1.chunk.js",
-    "static/media/india.png": "/kanban_board/static/media/india.5682084bca7bb9e3ad22.png",
-    "index.html": "/kanban_board/index.html",
-    "main.79f98983.css.map": "/kanban_board/static/css/main.79f98983.css.map",
-    "main.0217e89a.js.map": "/kanban_board/static/js/main.0217e89a.js.map",
-    "787.0dc1bfd1.chunk.js.map": "/kanban_board/static/js/787.0dc1bfd1.chunk.js.map"
+    "main.css": "/To-Do-List-or-Task-Manager/static/css/main.63b5710b.css",
+    "main.js": "/To-Do-List-or-Task-Manager/static/js/main.b68eaad6.js",
+    "static/js/787.0dc1bfd1.chunk.js": "/To-Do-List-or-Task-Manager/static/js/787.0dc1bfd1.chunk.js",
+    "static/media/india.png": "/To-Do-List-or-Task-Manager/static/media/india.5682084bca7bb9e3ad22.png",
+    "index.html": "/To-Do-List-or-Task-Manager/index.html",
+    "main.63b5710b.css.map": "/To-Do-List-or-Task-Manager/static/css/main.63b5710b.css.map",
+    "main.b68eaad6.js.map": "/To-Do-List-or-Task-Manager/static/js/main.b68eaad6.js.map",
+    "787.0dc1bfd1.chunk.js.map": "/To-Do-List-or-Task-Manager/static/js/787.0dc1bfd1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.79f98983.css",
-    "static/js/main.0217e89a.js"
+    "static/css/main.63b5710b.css",
+    "static/js/main.b68eaad6.js"
   ]
 }
